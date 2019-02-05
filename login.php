@@ -77,13 +77,17 @@ if (isset($_POST["login"])) {
             <p>パスワード<input type="password" id="password" name="password" placeholder="パスワードを入力"></p>
             <input type="submit" id="login" name="login" value="ログイン">
             <?php
-            if(isset($_GET['Admin_flg'])==1){
-                header('Location: http://localhost/forever/kanrisya.php');
+            //ログインボタンが押された場合
+            if (isset($_POST["login"])) {
+                if (isset($_POST['Admin_flg'])==1) {
+                    header('Location: http://localhost/forever/kanrisya.php');
+                    exit;
+                } else {
+                     header('Location: http://localhost/forever/ippan.php');
                 exit;
-            }else{
-                header('Location: http://localhost/forever/ippan.php');
-                exit;
+                }
             }
             ?>
+            
     </body>
 </html>
