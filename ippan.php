@@ -6,5 +6,6 @@
     <body>
         <h1>ホーム画面</h1>
         <p>一般ユーザログイン完了</p>
+        <button onclick="history.back()">戻る</button>
     </body>
 </html>
