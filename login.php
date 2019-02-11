@@ -6,15 +6,19 @@ if(isset($_POST['login'])){
     $password='';
     $id=$_POST['id'];
     $password=$_POST['password'];
-    if(!empty($id) && !empty($password)){ 
+    if(!empty($id) && !empty($password)){
         $dbh = new PDO('mysql:host=localhost;dbname=forever','root','' ); 
         $result = $dbh->query('SELECT * FROM user WHERE ID = ' .$id);
-        if(($result['admin_fig'])==1){
-            header('Location: http://localhost/forever/kanrisya.php');
-            exit;
+        if ($result["Password"]==$password) {
+            if($result['admin_fig']==1){
+                header('Location: http://localhost/forever/kanrisya.php');
+                exit;
+            }else{
+                header('Location: http://localhost/forever/ippan.php');
+                exit;
+            }
         }else{
-            header('Location: http://localhost/forever/ippan.php');
-            exit;
+            print 'IDとパスワードが一致しません';
         }
     } else {
         print 'IDまたはパスワードが未入力です。';
