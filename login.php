@@ -1,17 +1,25 @@
 <?php
 // セッション開始
 session_start();
-try {
-    $dbh = new PDO('mysql:host=localhost;dbname=forever','root','' ); 
-    $id=$_POST["id"];
-    $password=$_POST["password"];
-    foreach($dbh->query('SELECT * from user') as $row) {
-        $result = $dbh->query('SELECT * FROM user WHERE ID = ' .$id);
-    }
-    } catch (PDOException $e) {
+if(isset($_POST['login'])){
+    try {
+        $id='';
+        $password='';
+        $dbh = new PDO('mysql:host=localhost;dbname=forever','root','' ); 
+        $id=$_POST['id'];
+        $password=$_POST['password'];
+        if(!empty($id) && !empty($password)){
+            $result = $dbh->query('SELECT * FROM user WHERE ID = ' .$id);
+        }
+        foreach($dbh->query('SELECT * from user') as $row) {
+            $result = $dbh->query('SELECT * FROM user WHERE ID = ' .$id);
+        }
+    }catch (PDOException $e) {
         print "エラー!: " . $e->getMessage() . "<br/>";
         die();
     }
+    $dbh = null;
+}
 ?>
 
  <?php
@@ -51,6 +59,7 @@ if(isset($_POST["login"])){
             <p>パスワード<input type="password" name="password" placeholder="パスワードを入力"></p>
             <?php echo $errorMessage; ?>
             <input type="submit" id="login" name="login" value="ログイン">
+        
         </form>
     </body>
 </html>
