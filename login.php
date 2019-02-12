@@ -9,6 +9,7 @@ if(isset($_POST['login'])){
     if(!empty($id) && !empty($password)){
         $dbh = new PDO('mysql:host=localhost;dbname=forever','root','' ); 
         $result = $dbh->query('SELECT * FROM user WHERE ID = ' .$id);
+        $result->fetch(PDO::FETCH_ASSOC);
         if ($result["Password"]==$password) {
             if($result['admin_fig']==1){
                 header('Location: http://localhost/forever/kanrisya.php');
