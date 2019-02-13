@@ -2,8 +2,6 @@
 // セッション開始
 session_start();
 if(isset($_POST['login'])){
-    $id='';
-    $password='';
     $id=$_POST['id'];
     $password=$_POST['password'];
     if(!empty($id) && !empty($password)){
@@ -31,13 +29,6 @@ if(isset($_POST['login'])){
         die();
     }
     $dbh = null;
-}
-?>
-
-<?php
-//ログインボタンが押された場合
-if(isset($_POST["login"])){
-    
 }
 ?>
 <html>
