@@ -8,6 +8,7 @@
         <?php
         session_start();
         print $_SESSION['name'];
+        exit;
         ?>
         <p>管理者ログイン完了</p> 
         <input value="ログアウト" onclick="history.back();" type="button">

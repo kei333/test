@@ -1,6 +1,7 @@
 <?php
 // セッション開始
 session_start();
+$errorMessage = "";
 if(isset($_POST['login'])){
     $id=$_POST['id'];
     $password=$_POST['password'];
@@ -18,15 +19,15 @@ if(isset($_POST['login'])){
                 exit;
             }
         }else{
-            print 'IDとパスワードが一致しません';
+            $errorMessage = IDとパスワードが一致しません;
         }
     } else {
-        print 'IDまたはパスワードが未入力です。';
+        $errorMessage= 'IDまたはパスワードが未入力です。';
     }
     try {
         
     }catch (PDOException $e) {
-        print "エラー!: " ;
+        $errorMessage= "エラー!: " ;
         die();
     }
     $dbh = null;
@@ -39,6 +40,7 @@ if(isset($_POST['login'])){
     </head>
     <body>
         <h1>ログイン画面</h1>
+        <?php $errorMessage ?>
         <form action="login.php" method="POST">
             <p>ID:<input type="text" name="id" placeholder="IDを入力"></p>
             <p>パスワード<input type="password" name="password" placeholder="パスワードを入力"></p>

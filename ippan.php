@@ -9,6 +9,7 @@
         <?php
         session_start();
         print $_SESSION['name'];
+        exit;
         ?>
         <input value="ログアウト" onclick="history.back();" type="button">
     </body> 
