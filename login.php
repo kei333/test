@@ -1,18 +1,20 @@
 <?php
 // セッション開始
 session_start();
-$errorMessage = "";
-if(isset($_POST['login'])){
-    $id=$_POST['id'];
+$errorMessage = ""; //エラーメッセージの宣言
+if(isset($_POST['login'])){ //ログインボタンが押されたとき
+    $id=$_POST['id']; //idを格納
     $password=$_POST['password'];
     try {
-         $dbh = new PDO('mysql:host=localhost;dbname=forever','root','' ); 
+         //DB検索
+        $dbh = new PDO('mysql:host=localhost;dbname=forever','root','' );
+         //idのデータを検索
         $result = $dbh->query('SELECT * FROM user WHERE ID = ' .$id);
-        $result->fetch(PDO::FETCH_ASSOC);
+        $result->fetch(PDO::FETCH_ASSOC);//エラーはいている
         $_SESSION['name']=$result['NAME'];
-        if(!empty($id) && !empty($password)){
-            if ($result["Password"]===$password) {
-                if($result['admin_fig']==1){
+        if(!empty($id) && !empty($password)){ //空じゃないとき
+            if ($result["Password"]===$password) { //パスワードが一致したとき
+                if($result['admin_fig']==1){ //管理者のとき
                     header('Location: http://localhost/forever/kanrisya.php');
                     exit;
                 }else{
