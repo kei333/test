@@ -5,32 +5,30 @@ $errorMessage = "";
 if(isset($_POST['login'])){
     $id=$_POST['id'];
     $password=$_POST['password'];
-    if(!empty($id) && !empty($password)){
-        $dbh = new PDO('mysql:host=localhost;dbname=forever','root','' ); 
+    try {
+         $dbh = new PDO('mysql:host=localhost;dbname=forever','root','' ); 
         $result = $dbh->query('SELECT * FROM user WHERE ID = ' .$id);
         $result->fetch(PDO::FETCH_ASSOC);
         $_SESSION['name']=$result['NAME'];
-        if ($result["Password"]==$password) {
-            if($result['admin_fig']==1){
-                header('Location: http://localhost/forever/kanrisya.php');
-                exit;
+        if(!empty($id) && !empty($password)){
+            if ($result["Password"]===$password) {
+                if($result['admin_fig']==1){
+                    header('Location: http://localhost/forever/kanrisya.php');
+                    exit;
+                }else{
+                    header('Location: http://localhost/forever/ippan.php');
+                    exit;
+                }
             }else{
-                header('Location: http://localhost/forever/ippan.php');
-                exit;
+                $errorMessage = 'IDとパスワードが一致しません。';
             }
         }else{
-            $errorMessage = IDとパスワードが一致しません;
+            $errorMessage= 'IDまたはパスワードが未入力です。';
         }
-    } else {
-        $errorMessage= 'IDまたはパスワードが未入力です。';
-    }
-    try {
-        
     }catch (PDOException $e) {
         $errorMessage= "エラー!: " ;
         die();
     }
-    $dbh = null;
 }
 ?>
 <html>
