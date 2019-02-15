@@ -45,7 +45,6 @@ if(isset($_POST['login'])){ //ログインボタンが押されたとき
             <p>ID:<input type="text" name="id" placeholder="IDを入力"></p>
             <p>パスワード<input type="password" name="password" placeholder="パスワードを入力"></p>
             <input type="submit" id="login" name="login" value="ログイン">
-        
         </form>
     </body>
 </html>

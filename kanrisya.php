@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(isset($_POST['logout'])){
     $_SESSION = array();// セッションの変数のクリア
     @session_destroy();// セッションクリア
@@ -14,7 +15,6 @@ if(isset($_POST['logout'])){
     <body> 
         <h1>ホーム画面</h1> 
         <?php
-        session_start();
         print $_SESSION['name'];
         ?>
         <form action="kanrisya.php" method="POST">
