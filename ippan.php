@@ -1,3 +1,11 @@
+<?php
+if(isset($_POST['logout'])){
+    $_SESSION = array();
+    @session_destroy();
+    header('Location: http://localhost/forever/login.php');
+    exit;
+}
+?>
 <html> 
     <head> 
             <meta charset="UTF-8"> 
@@ -5,12 +13,13 @@
     </head> 
     <body> 
         <h1>ホーム画面</h1> 
-        <p>一般ユーザログイン完了</p> 
         <?php
         session_start();
         print $_SESSION['name'];
-        exit;
         ?>
-        <input value="ログアウト" onclick="history.back();" type="button">
-    </body> 
+        <form action="ippan.php" method="POST">
+        <p>一般ユーザログイン完了</p> 
+        <input type="submit" id="logout" name="logout" value="ログアウト">
+        </form>
+    </body>
 </html> 

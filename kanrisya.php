@@ -1,3 +1,11 @@
+<?php
+if(isset($_POST['logout'])){
+    $_SESSION = array();// セッションの変数のクリア
+    @session_destroy();// セッションクリア
+    header('Location: http://localhost/forever/login.php');
+    exit;
+}
+?>
 <html> 
     <head> 
             <meta charset="UTF-8"> 
@@ -8,9 +16,10 @@
         <?php
         session_start();
         print $_SESSION['name'];
-        exit;
         ?>
+        <form action="kanrisya.php" method="POST">
         <p>管理者ログイン完了</p> 
-        <input value="ログアウト" onclick="history.back();" type="button">
+        <input type="submit" id="logout" name="logout" value="ログアウト">
+        </form>
     </body> 
 </html> 
