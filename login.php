@@ -9,8 +9,9 @@ if(isset($_POST['login'])){ //ログインボタンが押されたとき
          //DB検索
         $dbh = new PDO('mysql:host=localhost;dbname=forever','root','' );
          //idのデータを検索
-        $stmt = $dbh->query('SELECT * FROM user WHERE id = ' .$id);
-        //$results = $stmt->fetchall(PDO::FETCH_ASSOC);
+        $query="SELECT * FROM user WHERE id =" .$id;
+        $stmt = $dbh->query($query);
+        //$result = $stmt->fetchall(PDO::FETCH_ASSOC);
         $_SESSION['name']=$stmt['name'];
         if(!empty($id) && !empty($password)){ //空じゃないとき
             if ($stmt["password"]===$password) { //パスワードが一致したとき
