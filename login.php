@@ -9,12 +9,12 @@ if(isset($_POST['login'])){ //ログインボタンが押されたとき
          //DB検索
         $dbh = new PDO('mysql:host=localhost;dbname=forever','root','' );
          //idのデータを検索
-        $stmt = $dbh->query('SELECT * FROM user WHERE ID = ' .$id);
+        $stmt = $dbh->query('SELECT * FROM user WHERE id = ' .$id);
         //$results = $stmt->fetchall(PDO::FETCH_ASSOC);
-        $_SESSION['name']=$stmt['NAME'];
+        $_SESSION['name']=$stmt['name'];
         if(!empty($id) && !empty($password)){ //空じゃないとき
-            if ($stmt["Password"]===$password) { //パスワードが一致したとき
-                if($stmt['admin_fig']==1){ //管理者のとき
+            if ($stmt["password"]===$password) { //パスワードが一致したとき
+                if($stmt['admin_flg']==1){ //管理者のとき
                     header('Location: http://localhost/forever/kanrisya.php');
                     exit;
                 }else{
