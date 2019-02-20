@@ -27,8 +27,6 @@ if(isset($_POST['login'])){ //ログインボタンが押されたとき
             }else{
                 $errorMessage = 'IDとパスワードが一致しません。';
             }
-        }else{
-            $errorMessage= 'IDまたはパスワードが未入力です。';
         }
     }catch (PDOException $e) {
         $errorMessage= "エラー!: " ;
