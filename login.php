@@ -5,9 +5,6 @@ $errorMessage = ""; //エラーメッセージの宣言
 if(isset($_POST['login'])){ //ログインボタンが押されたとき
     $id=$_POST['id']; //idを格納
     $password=$_POST['password'];
-}else{
-    $errorMessage= 'IDまたはパスワードが未入力です。';
-}
     try {
          //DB検索
         $dbh = new PDO('mysql:host=localhost;dbname=forever','root','' );
@@ -32,6 +29,9 @@ if(isset($_POST['login'])){ //ログインボタンが押されたとき
         $errorMessage= "エラー!: " ;
         die();
     }
+}else{
+    $errorMessage= 'IDまたはパスワードが未入力です。';
+}
 ?>
 <html>
     <head>
