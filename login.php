@@ -1,20 +1,23 @@
 <?php
-// セッション開始
-session_start();
-$errorMessage = ""; //エラーメッセージの宣言
-if(isset($_POST['login'])){ //ログインボタンが押されたとき
-    $id=$_POST['id']; //idを格納
+session_start();// セッション開始
+$errorMessage = "";//エラーメッセージの宣言
+//ログインボタンが押されたとき
+if(isset($_POST['login'])){
+    $id=$_POST['id'];//idを格納
     $password=$_POST['password'];
-    try {
-         //DB検索
-        $dbh = new PDO('mysql:host=localhost;dbname=forever','root','' );
-         //idのデータを検索
-        $stmt = $dbh->prepare("SELECT * FROM user WHERE id = ?");
-        $stmt->bindValue(1,$id,PDO::PARAM_STR);
-        $_SESSION['name']=$stmt['name'];
-        if(!empty($id) && !empty($password)){ //空じゃないとき
-            if ($stmt["password"]===$password) { //パスワードが一致したとき
-                if($stmt['admin_flg']==1){ //管理者のとき
+    //空じゃないとき
+    if(!empty($id) && !empty($password)){
+        try {
+            $dbh = new PDO('mysql:host=localhost;dbname=forever','root','' );//DB接続
+            $stmt = $dbh->prepare("SELECT * FROM user WHERE id = ?");//idのデータを検索
+            $stmt->bindValue(1,$id,PDO::PARAM_STR);
+            $_SESSION['name']=$stmt['name'];
+            //入力IDが存在する
+            //
+            //パスワードが一致したとき
+            if ($stmt["password"]===$password) {
+                //管理者のとき
+                if($stmt['admin_flg']==1){
                     header('Location: http://localhost/forever/kanrisya.php');
                     exit;
                 }else{
@@ -24,13 +27,13 @@ if(isset($_POST['login'])){ //ログインボタンが押されたとき
             }else{
                 $errorMessage = 'IDとパスワードが一致しません。';
             }
-        }
-    }catch (PDOException $e) {
-        $errorMessage= "エラー!: " ;
-        die();
+        }catch (PDOException $e) {
+            $errorMessage= "エラー!: " ;
+            die();
+        }            
+    }else{
+        $errorMessage= 'IDまたはパスワードが未入力です。';
     }
-}else{
-    $errorMessage= 'IDまたはパスワードが未入力です。';
 }
 ?>
 <html>
@@ -40,7 +43,7 @@ if(isset($_POST['login'])){ //ログインボタンが押されたとき
     </head>
     <body>
         <h1>ログイン画面</h1>
-        <?php $errorMessage ?>
+        <p><?php $errorMessage ?></p>
         <form action="login.php" method="POST">
             <p>ID:<input type="text" name="id" placeholder="IDを入力"></p>
             <p>パスワード<input type="password" name="password" placeholder="パスワードを入力"></p>
