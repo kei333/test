@@ -12,8 +12,7 @@ if(isset($_POST['login'])){
             $stmt = $dbh->prepare("SELECT * FROM user WHERE id = ?");//idのデータを検索
             $stmt->bindValue(1,$id,PDO::PARAM_STR);
             $_SESSION['name']=$stmt['name'];
-            //入力IDが存在する
-            //
+            //入力IDが存在するか？
             //パスワードが一致したとき
             if ($stmt["password"]===$password) {
                 //管理者のとき
