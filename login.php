@@ -11,11 +11,14 @@ if(isset($_POST['login'])){
             $dbh = new PDO('mysql:host=localhost;dbname=forever','root','' );//DB接続
             $stmt = $dbh->prepare("SELECT * FROM user WHERE id = ?");//idのデータを検索
             $stmt->bindValue(1,$id,PDO::PARAM_STR);
-            $_SESSION['name']=$stmt['name'];
+            //↑入力データ($id)をstmtと関連付ける
+            $_SESSION['name']= $dbh->prepare("SELECT name FROM user WHERE id=?");//sessonにidのname格納
+            $pass = $dbh->prepare("SELECT password FROM user WHERE id=?");//パスワード格納
+            $flg = $dbh->prepare("SELECT admin_flg FROM user WHERE id=?");//権限格納
             //パスワードが一致したとき
-            if ($stmt["password"]===$password) {
+            if ($pass === $password) {
                 //管理者のとき
-                if($stmt['admin_flg']==1){
+                if($flg == 1){
                     header('Location: http://localhost/forever/kanrisya.php');
                     exit;
                 }else{
