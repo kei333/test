@@ -41,7 +41,7 @@ if(isset($_POST['login'])){
     </head>
     <body>
         <h1>ログイン画面</h1>
-        <p><?php $errorMessage ?></p>
+        <?php  print $errorMessage ?>
         <form action="login.php" method="POST">
             <p>ID:<input type="text" name="id" placeholder="IDを入力"></p>
             <p>パスワード<input type="password" name="password" placeholder="パスワードを入力"></p>
