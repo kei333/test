@@ -5,12 +5,13 @@ $errorMessage = "";//エラーメッセージの宣言
 if(isset($_POST['login'])){
     $id=$_POST['id'];//idを格納
     $password=$_POST['password'];
+    //echo "$id $password";
     //空じゃないとき
     if(!empty($id) && !empty($password)){
         try {
             $pdo = new PDO('mysql:host=localhost;dbname=forever;charset=utf8','root','' );//DB接続
-            print '接続に成功しました。';
-            /*foreach ($pdo->query('SELECT * FROM user') as $row){
+            /*print '接続に成功しました。';
+            foreach ($pdo->query('SELECT * FROM user') as $row){
                 var_dump($row);
             }*/
             foreach ($pdo->query('SELECT * FROM user WHERE id=KANRISYA') as $row){
