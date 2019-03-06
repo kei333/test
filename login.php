@@ -19,6 +19,7 @@ if(isset($_POST['login'])){
             }//17行目のエラー「無効な引数」
             $stmt = $pdo->prepare("SELECT * FROM user WHERE id = ?");
             $stmt->bindValue(1, $id, PDO::PARAM_STR);//値をstmtに関連付ける
+            //オブジェクトを配列として使用できない対策
             $_SESSION['name']= $pdo->prepare("SELECT name FROM user WHERE id=?");//sessonにidのname格納
             $pass = $pdo->prepare("SELECT password FROM user WHERE id=?");//パスワード格納
             $flg = $pdo->prepare("SELECT admin_flg FROM user WHERE id=?");//権限格納
