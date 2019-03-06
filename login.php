@@ -11,12 +11,14 @@ if(isset($_POST['login'])){
         try {
             $pdo = new PDO('mysql:host=localhost;dbname=forever;charset=utf8','root','' );//DB接続
             /*print '接続に成功しました。';
-            foreach ($pdo->query('SELECT * FROM user') as $row){
-                var_dump($row);
+            foreach ($pdo->query('SELECT * FROM user') as $row1){
+                var_dump($row1);
             }*/
-            foreach ($pdo->query('SELECT * FROM user WHERE id=KANRISYA') as $row){
-                var_dump($row);
-            }//16行目のエラー「無効な引数」
+            foreach ($pdo->query('SELECT * FROM user WHERE id=KANRISYA') as $row2){
+                var_dump($row2);
+            }//17行目のエラー「無効な引数」
+            $stmt = $pdo->prepare("SELECT * FROM user WHERE id = ?");
+            $stmt->bindValue(1, $id, PDO::PARAM_STR);//値をstmtに関連付ける
             $_SESSION['name']= $pdo->prepare("SELECT name FROM user WHERE id=?");//sessonにidのname格納
             $pass = $pdo->prepare("SELECT password FROM user WHERE id=?");//パスワード格納
             $flg = $pdo->prepare("SELECT admin_flg FROM user WHERE id=?");//権限格納
