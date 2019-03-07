@@ -13,10 +13,10 @@ if(isset($_POST['login'])){
             /*print '接続に成功しました。';
             foreach ($pdo->query('SELECT * FROM user') as $row1){
                 var_dump($row1);
-            }*/
-            foreach ($pdo->query('SELECT * FROM user WHERE id=KANRISYA') as $row2){
+            }
+            foreach ($pdo->query('SELECT * FROM user WHERE id="KANRISYA"') as $row2){
                 var_dump($row2);
-            }//17行目のエラー「無効な引数」
+            }*/
             $stmt = $pdo->prepare("SELECT * FROM user WHERE id = ?");
             $stmt->bindValue(1, $id, PDO::PARAM_STR);//値をstmtに関連付ける
             //オブジェクトを配列として使用できない対策
