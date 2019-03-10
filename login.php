@@ -19,7 +19,7 @@ if(isset($_POST['login'])){
             }*/
             $stmt = $pdo->prepare('SELECT * FROM user WHERE id = "?"');
             $stmt->bindValue(1, $id, PDO::PARAM_STR);
-            ////疑問符プレースホルダを使用して1からパラメータを始める
+            //疑問符プレースホルダを使用して1からパラメータを始める
             //オブジェクトを配列として使用できない対策
             $_SESSION['name']= $pdo->prepare("SELECT name FROM user WHERE id=?");//sessonにidのname格納
             $pass = $pdo->prepare("SELECT password FROM user WHERE id=?");//パスワード格納
