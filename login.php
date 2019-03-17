@@ -17,13 +17,17 @@ if(isset($_POST['login'])){
             foreach ($pdo->query('SELECT * FROM user WHERE id="KANRISYA"') as $row2){
                 var_dump($row2);
             }*/
-            $stmt = $pdo->prepare('SELECT * FROM user WHERE id = "?"');
+            $stmt = $pdo->prepare('SELECT * FROM user WHERE id = ?');
             $stmt->bindValue(1, $id, PDO::PARAM_STR);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            //var_dump($result);
             //疑問符プレースホルダを使用して1からパラメータを始める
-            //オブジェクトを配列として使用できない対策
-            $_SESSION['name']= $pdo->prepare("SELECT name FROM user WHERE id=?");//sessonにidのname格納
-            $pass = $pdo->prepare("SELECT password FROM user WHERE id=?");//パスワード格納
-            $flg = $pdo->prepare("SELECT admin_flg FROM user WHERE id=?");//権限格納
+            $_SESSION['name']= $result['name'];//nameを格納
+            //var_dump($_SESSION['name']);
+            $pass = $result['password'];
+            //var_dump($result['password']);
+            $flg = $result['admin_flg'];
             //パスワードが一致したとき
             if ($pass === $password) {
                 //管理者のとき
