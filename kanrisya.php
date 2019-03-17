@@ -13,7 +13,8 @@ if(isset($_POST['logout'])){
             <title>管理者</title> 
     </head> 
     <body> 
-        <h1>ホーム画面</h1> 
+        <h1>ホーム画面</h1>
+        <?php print "こんにちは"?>
         <?php
         print $_SESSION['name'];
         ?>

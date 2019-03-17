@@ -14,6 +14,7 @@ if(isset($_POST['logout'])){
     </head> 
     <body> 
         <h1>ホーム画面</h1> 
+        <?php print "こんにちは"?>
         <?php
         print $_SESSION['name'];
         ?>
